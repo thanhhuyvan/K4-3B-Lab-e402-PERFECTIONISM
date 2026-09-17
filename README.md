@@ -12,7 +12,7 @@
 ## Dự án
 
 - Track: B — Trợ lý Discord
-- Đề: B1 — Tối ưu trợ lý hiện có
+- Đề: B2 — Cải tiến bản tin cuối ngày cho TA/Mod
 - Trạng thái: Prototype đang phát triển
 
 - Canvas CP1: xem [canvas.md](canvas.md)

@@ -1,13 +1,13 @@
-# AI SPEC — Trợ lý Discord có căn cứ · Nhóm [XX] · Zone [X]
+# AI SPEC — Bản tin Discord hỗ trợ TA/Mod · Nhóm [XX] · Zone [X]
 
 Hướng: [ ] A — VLearn  [x] B — Trợ lý Học viên  [ ] C — Làn mở
-Loại: [x] Tối ưu tính năng có sẵn  [ ] Tính năng mới
+Loại: [ ] Tối ưu tính năng có sẵn  [x] Tính năng mới
 
 ## §1. User & Job
 
-- Job executor + workflow: Học viên đang hỏi deadline hoặc quy trình trên Discord → cần biết thông tin đúng để tiếp tục nộp bài/tham gia hoạt động.
-- Core JTBD: Khi cần xác nhận thông tin vận hành của chương trình, học viên muốn nhận được hướng dẫn đúng và có thể kiểm tra được để không bỏ lỡ deadline hoặc làm sai quy trình.
-- Problem statement: Học viên phải hỏi lại nhiều lần; câu trả lời hiện có đôi khi dài, thiếu căn cứ hoặc đoán khi chưa đủ thông tin.
+- Job executor + workflow: TA/Mod cuối ngày cần rà câu hỏi Discord chưa được giải quyết → mở bản tin → chọn câu hỏi ưu tiên → bấm link để xử lý.
+- Core JTBD: Khi kết thúc một ngày nhiều tin nhắn, TA muốn biết câu hỏi nào còn tồn và chủ đề nào nóng để xử lý đúng thứ tự mà không phải đọc lại toàn bộ Discord.
+- Problem statement: Bản tin hiện có thể bỏ sót, nhóm sai, bị cắt cụt hoặc đánh dấu đã phản hồi khi chưa xác nhận xử lý xong.
 - Evidence: Hoàn thiện bằng mining log và/hoặc khảo sát; không đưa dữ liệu cá nhân thật vào repo public.
   - Số liệu mining / khảo sát: [n = ?, phương pháp, kết quả]
   - ≥5 quote/ví dụ nguyên văn + msg_id: [bổ sung]
@@ -21,7 +21,7 @@ Loại: [x] Tối ưu tính năng có sẵn  [ ] Tính năng mới
 | Tra cứu trạng thái cá nhân | [ ] | [ ] | Dễ vượt quyền dữ liệu | Thấp | Không |
 
 - Ứng viên đã loại + lý do: [bổ sung bằng số]
-- Ứng viên chọn + lý do: B1, vì có pain và dữ liệu kiểm thử rõ nhất.
+- Ứng viên chọn + lý do: B2, vì có bản tin baseline đang chạy và các lỗi cụ thể để so sánh trước/sau.
 
 ## §3. Giải pháp tương tự đã nghiên cứu
 
@@ -30,14 +30,14 @@ Loại: [x] Tối ưu tính năng có sẵn  [ ] Tính năng mới
 
 ## §4. Thiết kế
 
-- Lát cắt một câu: Một học viên hỏi deadline hoặc quy trình nộp bài; bot chỉ trả lời khi tìm được nguồn chính thức, nếu không chắc thì chuyển TA/Mod để tránh thông tin sai.
+- Lát cắt một câu: Một TA xem bản tin cuối ngày; AI lọc, nhóm và xếp ưu tiên câu hỏi chưa được giải quyết sau 4 giờ; TA nhận danh sách ngắn kèm link để xử lý.
 - Non-goals:
-  1. Không trả lời dữ liệu cá nhân như lịch sử điểm danh của từng người.
-  2. Không tự quyết định gia hạn, điểm số hoặc chính sách.
+  1. Không nêu tên/định danh học viên trong bản tin công khai.
+  2. Không coi một reply là bằng chứng chắc chắn câu hỏi đã được giải quyết.
   3. Không tự động gửi DM/tag học viên khi chưa có người duyệt.
 - Mức prototype nhắm tới: [ ] Sketch  [x] Mock  [ ] Working
 - Phần thật/mock: AI phân loại và quyết định phản hồi là thật; giao diện, nguồn mẫu và kết nối Discord có thể mock.
-- Automation: [ ] augment  [x] conditional  [ ] automate. Case có nguồn chính thức thì trả lời; case mơ hồ, mâu thuẫn hoặc ngoài quyền thì hỏi lại/chuyển TA vì sai deadline có cost-of-error cao.
+- Automation: [ ] augment  [x] conditional  [ ] automate. AI tự lọc/nhóm/xếp ưu tiên; TA duyệt bản tin và quyết định phản hồi vì việc đánh dấu “đã xử lý” hoặc tag người dùng có thể gây bỏ sót và làm phiền.
 
 ### §4b. Nguyên tắc HAX/PAIR
 

@@ -1,22 +1,22 @@
-# Canvas CP1 — Trợ lý Discord có căn cứ
+# Canvas CP1 — Bản tin Discord hỗ trợ TA/Mod
 
 > Mỗi dòng chỉ trả lời một ý. Các số có `[ ]` phải được nhóm kiểm tra lại trước khi nộp. Không chép nguyên file dữ liệu Discord vào repo public.
 
-1. **Track + đề:** B · Trợ lý Discord — B1: tối ưu trợ lý hiện có, tập trung vào câu hỏi deadline/quy trình nộp bài có nguồn chính thức.
+1. **Track + đề:** B · Trợ lý Discord — B2: cải tiến bản tin cuối ngày để TA/Mod xử lý câu hỏi tồn nhanh hơn.
 
-2. **Job executor:** Học viên đang ở Discord, cần xác nhận deadline hoặc quy trình nộp bài trước khi tiếp tục làm/nộp lab.
+2. **Job executor:** TA/Mod cuối ngày đang cần rà các câu hỏi Discord chưa được giải quyết để ưu tiên trả lời đúng vấn đề.
 
-3. **Pain:** Khi hỏi thông tin vận hành trên Discord, học viên có thể nhận câu trả lời dài, thiếu nguồn hoặc bị đoán; nếu tin sai, bạn có thể nộp muộn hoặc làm sai quy trình.
+3. **Pain:** Câu hỏi học viên bị trôi giữa nhiều tin nhắn; bản tin hiện tại có thể bỏ sót, nhóm sai hoặc đánh dấu đã phản hồi dù chưa chắc đã xử lý xong, khiến TA mất thời gian lọc.
 
 4. **Bằng chứng đầu:**
-   - Data pack có `1.092` tin nhắn, gồm `779` tin của người dùng và `313` tin của bot; `307` tin người dùng có mention bot. *Nguồn:* `data/discord-pack/README.md`; cần bổ sung các `msg_id` minh hoạ và cách đếm nhóm câu hỏi logistics.
-   - Quét sơ bộ các tin người dùng theo nhóm từ khoá deadline/hạn/nộp/điểm danh/standup/XP/ticket/link cho thấy `208` tin có tín hiệu logistics. Đây chỉ là số sơ bộ; nhóm sẽ rà nhãn thủ công và chốt số thật trong evidence log.
+   - Data pack có `1.092` tin nhắn, gồm `779` tin người dùng và `313` tin bot; `307` tin có mention bot. *Nguồn:* `data/discord-pack/README.md`.
+   - `k4_daily_reports.md` có 4 bản tin baseline với lỗi thật: chèn chuỗi “nguồn tham chiếu” giữa từ, tóm tắt bị cắt cụt và trạng thái “đã phản hồi” chưa được kiểm chứng. Cần bổ sung `msg_id` và bảng đếm lỗi.
 
-5. **Lát cắt MỘT CÂU:** Học viên hỏi deadline hoặc quy trình nộp bài · AI quyết định câu trả lời có căn cứ chính thức hay không · nếu có thì trả lời ngắn kèm nguồn, nếu không thì hỏi lại hoặc chuyển TA/Mod · học viên không nhận deadline sai.
+5. **Lát cắt MỘT CÂU:** Một TA xem bản tin cuối ngày · cần biết câu hỏi nào chưa được giải quyết sau 4 giờ · AI lọc, nhóm chủ đề và xếp ưu tiên câu hỏi tồn · TA có danh sách ngắn kèm link để xử lý trước.
 
-6. **AI tự làm đến đâu:** *Tự* nhận diện intent và trả lời case logistics khi tìm được nguồn chính thức rõ ràng. *Không tự* đoán khi nguồn thiếu/mâu thuẫn, không xác nhận dữ liệu cá nhân, không quyết định gia hạn hay điểm số; khi đó phải nêu giới hạn và chuyển TA/Mod. *Lý do:* sai thông tin deadline có cost-of-error cao hơn chi phí chờ người thật xác nhận. **Willing users ngoài nhóm:** `[Tên 1]`, `[Tên 2]`, `[Tên 3]`.
+6. **AI tự làm đến đâu:** *Tự* lọc câu hỏi, nhóm cách hỏi tương tự, tóm tắt, xếp ưu tiên và gắn link tin nguồn. *Không tự* kết luận đã xử lý chỉ vì có reply, không nêu tên học viên công khai và không tự gửi DM/tag; TA duyệt trước khi đăng. *Lý do:* bản tin sai làm TA bỏ sót vấn đề hoặc làm lộ thông tin; người thật giữ quyết định cuối. **Willing users ngoài nhóm:** `[Tên 1]`, `[Tên 2]`, `[Tên 3]`.
 
-7. **Phân công:** `[Thành viên 4]` — chốt hướng B1, tổng hợp Canvas, viết job/pain/lát cắt · `[Thành viên 2]` — mining evidence + log đếm · `[Thành viên 3]` — prototype + flow demo · `Văn Thành Huy` — đội trưởng, kiểm tra repo, trình bày và nộp CP1.
+7. **Phân công:** `[Thành viên 4]` — chốt hướng B2, tổng hợp Canvas, viết job/pain/lát cắt · `[Thành viên 2]` — mining bản tin và log lỗi · `[Thành viên 3]` — prototype bản tin + flow demo · `Văn Thành Huy` — đội trưởng, kiểm tra repo, trình bày và nộp CP1.
 
 ## Checklist trước khi nộp
 
