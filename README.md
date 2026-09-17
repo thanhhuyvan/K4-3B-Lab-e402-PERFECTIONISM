@@ -5,7 +5,7 @@
 | Họ và tên | Mã học viên | Vai trò chính | Phần việc đảm nhiệm |
 |---|---|---|---|
 | [Văn Thành Huy] | [2A202602763] | Đội trưởng / Repo & trình bày | Kiểm tra repo public, cập nhật README, chuẩn bị và nộp hồ sơ CP1 |
-| [Thành viên 2] | [Mã] | Evidence | Mining Discord, khảo sát |
+| [Nguyễn Đức Đông] | [2A202602367] | Evidence | Mining Discord, khảo sát |
 | [Bùi Quốc Việt] | [2A202602884] | Prototype | Code và demo flow |
 | [Lê Thị Duyên] | [2A202602411] | Nội dung / Spec | Chốt hướng B1, tổng hợp Canvas, viết job, pain và lát cắt |
 
