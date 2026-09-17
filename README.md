@@ -18,3 +18,5 @@
 - Canvas CP1: xem [canvas.md](canvas.md)
 
 Các thư mục còn lại chứa spec, prototype, bộ kiểm thử, validation và reflection cá nhân.
+
+Mẫu khảo sát/phỏng vấn B2: [research/survey-template.md](research/survey-template.md)
