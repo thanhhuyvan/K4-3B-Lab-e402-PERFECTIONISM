@@ -1,0 +1,3 @@
+# Ignore raw data files containing sensitive Discord messages
+k4_messages.csv
+*.csv
