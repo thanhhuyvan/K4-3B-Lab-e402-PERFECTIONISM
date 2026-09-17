@@ -14,7 +14,7 @@
 
 5. **Lát cắt MỘT CÂU:** Một TA xem bản tin cuối ngày · cần biết câu hỏi nào chưa được giải quyết sau 4 giờ · AI lọc, nhóm chủ đề và xếp ưu tiên câu hỏi tồn · TA có danh sách ngắn kèm link để xử lý trước.
 
-6. **AI tự làm đến đâu:** *Tự* lọc câu hỏi, nhóm cách hỏi tương tự, tóm tắt, xếp ưu tiên và gắn link tin nguồn. *Không tự* kết luận đã xử lý chỉ vì có reply, không nêu tên học viên công khai và không tự gửi DM/tag; TA duyệt trước khi đăng. *Lý do:* bản tin sai làm TA bỏ sót vấn đề hoặc làm lộ thông tin; người thật giữ quyết định cuối. **Willing users ngoài nhóm:** `[Tên 1]`, `[Tên 2]`, `[Tên 3]`.
+6. **AI tự làm đến đâu:** *Tự* lọc câu hỏi, nhóm cách hỏi tương tự, tóm tắt, xếp ưu tiên và gắn link tin nguồn. *Không tự* kết luận đã xử lý chỉ vì có reply, không nêu tên học viên công khai và không tự gửi DM/tag; TA duyệt trước khi đăng. *Lý do:* bản tin sai làm TA bỏ sót vấn đề hoặc làm lộ thông tin; người thật giữ quyết định cuối. **Willing users ngoài nhóm:** Nguyễn Thị Lê Na, Phạm Đình Bảo Khôi, Nguyễn Hữu Thành.
 
 7. **Phân công:** `[Thành viên 4]` — chốt hướng B2, tổng hợp Canvas, viết job/pain/lát cắt · `[Thành viên 2]` — mining bản tin và log lỗi · `[Thành viên 3]` — prototype bản tin + flow demo · `Văn Thành Huy` — đội trưởng, kiểm tra repo, trình bày và nộp CP1.
 
