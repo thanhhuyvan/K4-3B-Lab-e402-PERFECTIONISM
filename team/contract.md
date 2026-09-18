@@ -1,6 +1,6 @@
 # Hợp đồng tích hợp CP3 — bản đề xuất
 
-Huy chốt contract ở đầu buổi và thông báo trước khi đổi. Endpoint dưới đây là schema bàn giao; phần endpoint chạy thật phải do Huy cung cấp sau khi tích hợp backend. Hiện schema này chưa có nghĩa là endpoint đã tồn tại trong repo chính.
+Huy chốt contract ở đầu buổi và thông báo trước khi đổi. Endpoint chạy local đã được triển khai tại `codebase/server.js`; backend và UI chạy cùng localhost.
 
 ## Định nghĩa sản phẩm
 
@@ -15,7 +15,7 @@ Huy chốt contract ở đầu buổi và thông báo trước khi đổi. Endpo
 
 ## API đề xuất
 
-POST /api/analyze, multipart/form-data với trường file là CSV. Backend giữ API key, parse CSV nhiều dòng/ngoặc kép, kiểm tra cột và giới hạn dung lượng/số tin; thông báo rõ nếu chỉ xử lý một phần.
+POST `/api/analyze` với `Content-Type: application/json` và body `{ "csv": "<nội dung CSV>" }`. Backend giữ API key, parse CSV nhiều dòng/ngoặc kép, giới hạn body 20 MB và gọi AI theo lô 8 candidate. CSV không được commit.
 
 HTTP 200:
 
@@ -49,9 +49,7 @@ Khi tích hợp, backend phục vụ HTML trên cùng origin localhost. UI hiể
 
 ## Gói bàn giao Huy → Việt
 
-Huy cần gửi cho Việt đúng 3 thứ: (1) URL và method endpoint, (2) cách gửi CSV/request, (3) một response mẫu đúng schema ở trên. Việt dùng gói này để nối UI; không tự đoán URL hoặc đổi schema.
-
-Trong lúc chưa có backend tích hợp, Việt chỉ có thể dựng UI với response mẫu trong tài liệu này; không được báo là đã chạy AI thật.
+Gói bàn giao cho UI: URL cùng origin `/api/analyze`, method `POST`, request JSON có trường `csv`, response theo schema trên. UI không dùng response mẫu làm fallback khi API lỗi.
 
 ## Phân chia trách nhiệm
 

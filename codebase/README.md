@@ -1,11 +1,17 @@
-# Prototype CP2 và bàn giao CP3
+# CP3 — Trạm hỗ trợ Discord
 
-Mở demo_cp2_dashboard.html trực tiếp bằng trình duyệt. Chọn k4_messages.csv từ pack BTC trên máy rồi bấm Thống kê. Không cần mạng/API key cho CP2.
+Chạy bản CP3 local:
 
-- Bảng hai cột: Thời gian; Tóm tắt & mức độ quan trọng. Sort theo thời gian hoặc mức quan trọng.
-- Nguồn chỉ hiển thị chữ server/kênh/msg_id; không mở nội dung nguồn hoặc tin lân cận.
-- CSV thật được đọc vào bộ nhớ trình duyệt, không nhúng dataset vào HTML hoặc gửi lên server trong CP2.
-- Bản hiện tại dùng regex, trích ngắn nội dung và gợi ý ưu tiên theo từ khóa; chưa gọi AI.
-- Mốc thời gian là tin cuối trong CSV. Quy tắc CP2 tìm tin có dấu hiệu hỏi, chờ ít nhất 4 giờ, không có reply trực tiếp trong dữ liệu.
-- CP3 phải cải tiến giới hạn trên: giữ cả case có reply nhưng chưa giải quyết, gọi AI thật, kiểm thử cả lỗi bộ lọc.
-- Không push nguyên dataset. Hướng dẫn cá nhân trong team/ là kế hoạch CP3, chưa phải backend đã triển khai.
+```powershell
+Copy-Item .env.example .env
+# Điền GOOGLE_API_KEY vào .env local, không commit file này.
+node server.js
+```
+
+Mở `http://localhost:8787`. Chọn CSV BTC từ máy, bấm **Phân tích**. Backend đọc CSV, giữ reply làm ngữ cảnh, gọi Gemini theo từng lô 8 candidate và trả bảng hai cột cho UI.
+
+- Key chỉ nằm ở backend local; CSV không được commit.
+- UI chỉ hiển thị các mục AI đánh dấu `needs_attention=true`; `uncertain` hiện nhãn **Cần xác minh**.
+- Nguồn chỉ là `server / kênh / msg_id`, không có link mở nội dung.
+- Nếu API lỗi, UI hiển thị lỗi; không fallback sang dữ liệu demo.
+- `demo_cp2_dashboard.html` là bản CP2 cũ, không có AI.
