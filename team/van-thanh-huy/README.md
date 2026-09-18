@@ -16,7 +16,7 @@
 3. Phút 90 cùng Việt chạy một case từ UI đến kết quả. Backend phục vụ HTML cùng origin localhost.
 4. Nhận kết quả test từ Đông, sửa lỗi chính; Duyên quay video. Bạn review và nộp theo form/hạn 3B.
 
-**Nhận từ:** Việt UI; Duyên prompt; Đông case và số đo.
+**Nhận từ:** Việt: giao diện và format request cần gọi; Duyên: prompt/rubric; Đông: case và số đo. Huy phải gửi lại cho Việt URL + method endpoint, format request và response mẫu đúng contract; đây là gói bàn giao bắt buộc, không phải file đã có sẵn.
 **Bàn giao:** backend/, hướng dẫn chạy và trace đã che key; tích hợp bản chính vào codebase/, kết quả vào eval/.
 
 **Xong khi:** AI thật chạy end-to-end, lỗi API được báo, có lượt test đủ mọi case và video 30 giây.

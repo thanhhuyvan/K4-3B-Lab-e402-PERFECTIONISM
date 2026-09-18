@@ -16,7 +16,7 @@
 3. Sort thời gian/ưu tiên; nhãn “cần xác minh” khi uncertain, “chưa xác định” khi importance=null.
 4. Phút 90 cùng Huy chạy một case xuyên suốt; sau đó kiểm tra API, sort, lỗi trên desktop/mobile.
 
-**Nhận từ:** Huy endpoint và response mẫu.
+**Nhận từ Huy:** sau khi backend được tích hợp, Huy gửi URL + method endpoint, format request CSV và response mẫu đúng [contract](../contract.md). Hiện repo chính mới có schema mẫu; endpoint thật chưa nằm trong thư mục này, nên không tự đoán URL.
 **Giao Huy:** ui/ + vài dòng cách chạy, phần đã thử và lỗi còn tồn. Huy tích hợp vào codebase/.
 
 **Xong khi:** nạp CSV, nhận AI thật, bảng/sort đúng, lỗi API không bị thay bằng mock.

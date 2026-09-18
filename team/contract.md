@@ -1,6 +1,6 @@
 # Hợp đồng tích hợp CP3 — bản đề xuất
 
-Huy chốt contract ở đầu buổi và thông báo trước khi đổi. Endpoint dưới đây là thiết kế dự kiến, chưa được triển khai.
+Huy chốt contract ở đầu buổi và thông báo trước khi đổi. Endpoint dưới đây là schema bàn giao; phần endpoint chạy thật phải do Huy cung cấp sau khi tích hợp backend. Hiện schema này chưa có nghĩa là endpoint đã tồn tại trong repo chính.
 
 ## Định nghĩa sản phẩm
 
@@ -46,6 +46,12 @@ Ví dụ trên minh họa schema, không phải kết quả đã đo. importance
 HTTP 400/413/502 trả {"error":{"code":"...","message":"..."}}. API lỗi thì hiển thị lỗi và nút thử lại, không báo có kết quả AI.
 
 Khi tích hợp, backend phục vụ HTML trên cùng origin localhost. UI hiển thị “cần xác minh” cho review_state=uncertain ngay trong cột summary.
+
+## Gói bàn giao Huy → Việt
+
+Huy cần gửi cho Việt đúng 3 thứ: (1) URL và method endpoint, (2) cách gửi CSV/request, (3) một response mẫu đúng schema ở trên. Việt dùng gói này để nối UI; không tự đoán URL hoặc đổi schema.
+
+Trong lúc chưa có backend tích hợp, Việt chỉ có thể dựng UI với response mẫu trong tài liệu này; không được báo là đã chạy AI thật.
 
 ## Phân chia trách nhiệm
 
