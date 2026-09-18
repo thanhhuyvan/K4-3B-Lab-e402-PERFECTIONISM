@@ -11,6 +11,8 @@
 
 ## Dự án
 
+CP3: mỗi người đọc [nhiệm vụ riêng](team/README.md). Backend/AI thật đang là phần cần triển khai.
+
 - Track: B — Trợ lý Discord
 - Đề: B2 — Cải tiến bản tin cuối ngày cho TA/Mod
 - Trạng thái: Prototype đang phát triển
@@ -23,20 +25,4 @@ Mẫu khảo sát/phỏng vấn B2: [research/survey-template.md](research/surve
 
 Dữ liệu khảo sát B2: [Survay.csv](Survay.csv)
 
-## Phân công CP2 — Flow bản tin bấm được
-
-| Người | Việc cần hoàn thành | Output |
-|---|---|---|
-| Văn Thành Huy — Technical Decision Maker | Chốt công nghệ, cấu trúc màn hình, trạng thái dữ liệu; tích hợp và kiểm tra flow | Một flow chạy end-to-end, không can thiệp tay giữa chừng |
-| Lê Thị Duyên — Nội dung/Spec | Chốt 3 tình huống demo và microcopy cho từng trạng thái | Case bình thường, case câu hỏi tồn, case đã reply nhưng chưa chắc đã giải quyết |
-| Nguyễn Đức Đông — Evidence | Chọn ví dụ baseline, link/`msg_id`, kiểm tra bản tin mới không lặp lỗi cũ | Bộ dữ liệu mẫu an toàn, không chứa thông tin cá nhân |
-| Bùi Quốc Việt — Prototype/UI | Dựng giao diện bản tin và các nút/đường dẫn tương tác | Mock bấm được từ danh sách → chi tiết → link xử lý |
-
-### Tiêu chí hoàn thành CP2
-
-- [ ] Có thể mở bản tin cuối ngày.
-- [ ] Có danh sách câu hỏi được nhóm và xếp ưu tiên.
-- [ ] Bấm được từ một mục trong bản tin tới màn hình chi tiết/link nguồn.
-- [ ] Có trạng thái “chưa có phản hồi” khác với “đã reply, chưa xác nhận giải quyết”.
-- [ ] Có ít nhất 3 case demo và phần mock được ghi rõ.
-- [ ] Có commit CP2 trong repo.
+Demo CP2 và hướng dẫn chạy: [codebase/README.md](codebase/README.md).
