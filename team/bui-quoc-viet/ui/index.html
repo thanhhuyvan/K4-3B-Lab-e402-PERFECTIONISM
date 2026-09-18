@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trạm hỗ trợ · Perfectionism</title>
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<header><a class="brand" href="./index.html"><span class="logo">p.</span>perfectionism<span class="divider"></span><small>Trạm hỗ trợ</small></a><span class="workspace">● &nbsp; Không gian TA / Mod</span></header>
+<main>
+<div class="eyebrow">TRACK B2 <span>/</span> HỖ TRỢ HỌC VIÊN</div>
+<section class="hero"><div><h1>Để mỗi câu hỏi<br>đều được <em>chú ý.</em></h1><p>Tập trung vào những câu hỏi cần xem lại.<br>Nắm nhanh nội dung, cân nhắc mức độ và chủ động hỗ trợ.</p></div><aside class="note"><span>✦</span><div><strong>Thêm một góc nhìn cho TA</strong><p>Đề xuất giúp bạn rà soát.<br>Quyết định hỗ trợ luôn ở bạn.</p></div></aside></section>
+<aside class="demo"><b>BẢN DEMO</b><p>Đang dùng response mẫu theo contract. Chưa chạy AI thật; CSV được chọn chưa được đọc hay gửi đi.</p></aside>
+<section class="card upload-card" aria-labelledby="upload-title">
+<div class="heading"><span class="step">01</span><div><h2 id="upload-title">Bắt đầu với dữ liệu của bạn</h2><p>Chọn tệp CSV để trải nghiệm luồng phân tích.</p></div><span class="file-type">.CSV</span></div>
+<label class="upload-zone" id="drop-zone" for="file"><input id="file" type="file" accept=".csv,text/csv" aria-describedby="file-help"><span class="upload-icon" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span><strong id="file-name">Kéo thả tệp CSV vào đây</strong><span id="file-help">hoặc <b>chọn tệp từ máy tính</b></span><small id="file-meta">Định dạng .csv · Mỗi lần một tệp</small></label>
+<div class="actions"><label for="scenario">Tình huống demo<select id="scenario"><option value="contract">Response mẫu contract</option><option value="mixed">Thử sort & cần xác minh</option><option value="empty">Kết quả rỗng</option><option value="error">Lỗi phân tích</option></select></label><button id="run" class="primary" disabled><span id="run-label">Phân tích</span><span aria-hidden="true">↗</span></button></div>
+</section>
+<section class="card" id="results-panel" aria-labelledby="results-title" aria-busy="false">
+<div class="toolbar"><div class="heading"><span class="step">02</span><div><h2 id="results-title">Câu hỏi cần chú ý <span id="result-count">—</span></h2><p id="count" role="status" aria-live="polite">Kết quả sẽ xuất hiện sau khi phân tích.</p></div></div><label for="sort">Sắp xếp<select id="sort" disabled><option value="priority">Mức độ quan trọng</option><option value="oldest">Thời gian: cũ nhất</option><option value="newest">Thời gian: mới nhất</option></select></label></div>
+<table><thead><tr><th scope="col">Thời gian</th><th scope="col">Tóm tắt &amp; mức độ quan trọng</th></tr></thead><tbody id="rows"></tbody></table>
+<div class="table-footer">● &nbsp; “Cần chú ý” là đề xuất rà soát, không khẳng định chưa có người hỗ trợ.</div>
+</section>
+<footer><span>PERFECTIONISM &nbsp; / &nbsp; Làm việc rõ ràng. Hỗ trợ kịp thời.</span><span>CP3 · Giao diện thử nghiệm</span></footer>
+</main>
+</body>
+</html>
