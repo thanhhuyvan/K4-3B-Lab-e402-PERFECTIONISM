@@ -10,18 +10,22 @@
 <main>
 <div class="eyebrow">TRACK B2 <span>/</span> HỖ TRỢ HỌC VIÊN</div>
 <section class="hero"><div><h1>Để mỗi câu hỏi<br>đều được <em>chú ý.</em></h1><p>Tập trung vào những câu hỏi cần xem lại.<br>Nắm nhanh nội dung, cân nhắc mức độ và chủ động hỗ trợ.</p></div><aside class="note"><span>✦</span><div><strong>Thêm một góc nhìn cho TA</strong><p>Đề xuất giúp bạn rà soát.<br>Quyết định hỗ trợ luôn ở bạn.</p></div></aside></section>
-<aside class="demo"><b>AI THẬT</b><p>CSV chỉ gửi tới backend local. AI đề xuất câu cần xem lại; TA/Mod quyết định xử lý.</p></aside>
-<section class="card upload-card" aria-labelledby="upload-title">
-<div class="heading"><span class="step">01</span><div><h2 id="upload-title">Bắt đầu với dữ liệu của bạn</h2><p>Chọn tệp CSV để trải nghiệm luồng phân tích.</p></div><span class="file-type">.CSV</span></div>
-<label class="upload-zone" id="drop-zone" for="file"><input id="file" type="file" accept=".csv,text/csv" aria-describedby="file-help"><span class="upload-icon" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span><strong id="file-name">Kéo thả tệp CSV vào đây</strong><span id="file-help">hoặc <b>chọn tệp từ máy tính</b></span><small id="file-meta">Định dạng .csv · Mỗi lần một tệp</small></label>
-<div class="actions"><span class="small-note">AI xử lý theo lô nhỏ để tránh quá tải.</span><button id="run" class="primary" disabled><span id="run-label">Phân tích</span><span aria-hidden="true">↗</span></button></div>
+<aside class="demo"><b>AI THẬT</b><p>Hệ thống tự nạp batch từ Discord simulator, sau đó AI đề xuất câu cần TA/Mod xem lại.</p></aside>
+<section class="card sync-card" aria-labelledby="sync-title">
+<div class="heading"><span class="step">01</span><div><h2 id="sync-title">Bản tin tự động hằng ngày</h2><p id="sync-status" role="status" aria-live="polite">Đang nạp batch Discord demo…</p></div><span class="file-type">SIMULATOR</span></div>
+<div class="sync-content"><div><strong>Discord simulator</strong><p>Batch tin nhắn ẩn danh đã nằm ở backend. TA không cần chọn hay tải tệp dữ liệu.</p></div><button id="run" class="primary"><span id="run-label">Làm mới bản tin</span><span aria-hidden="true">↻</span></button></div>
+<small class="disclosure">Demo dùng local adapter thay cho Discord API. Khi triển khai thật, adapter này sẽ lấy tin nhắn từ Discord mà không đổi flow AI.</small>
 </section>
 <section class="card" id="results-panel" aria-labelledby="results-title" aria-busy="false">
-<div class="toolbar"><div class="heading"><span class="step">02</span><div><h2 id="results-title">Câu hỏi cần chú ý <span id="result-count">—</span></h2><p id="count" role="status" aria-live="polite">Kết quả sẽ xuất hiện sau khi phân tích.</p></div></div><label for="sort">Sắp xếp<select id="sort" disabled><option value="priority">Mức độ quan trọng</option><option value="oldest">Thời gian: cũ nhất</option><option value="newest">Thời gian: mới nhất</option></select></label></div>
+<div class="toolbar"><div class="heading"><span class="step">02</span><div><h2 id="results-title">Câu hỏi cần chú ý <span id="result-count">—</span></h2><p id="count" role="status" aria-live="polite">Kết quả sẽ xuất hiện sau khi phân tích.</p></div></div><label for="sort">Sắp xếp<select id="sort" disabled><option value="priority">Mức độ quan trọng</option><option value="progress">Tiến độ: chưa xử lý trước</option><option value="oldest">Thời gian: cũ nhất</option><option value="newest">Thời gian: mới nhất</option></select></label></div>
+<section class="ta-progress" aria-label="Tiến độ xử lý của TA"><div class="progress-label"><strong>Tiến độ xử lý</strong><span id="progress-text">Chưa có mục cần xử lý</span></div><div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-labelledby="progress-text"><span id="progress-value"></span></div><p>Đánh dấu từng mục để lưu tiến độ cho phiên làm việc này.</p></section>
+<div id="refresh-overlay" class="refresh-overlay" hidden><span class="loading-dot" aria-hidden="true"></span><span id="refresh-message">Đang cập nhật bản tin…</span></div>
 <table><thead><tr><th scope="col">Thời gian</th><th scope="col">Tóm tắt &amp; mức độ quan trọng</th></tr></thead><tbody id="rows"></tbody></table>
 <div class="table-footer">● &nbsp; “Cần chú ý” là đề xuất rà soát, không khẳng định chưa có người hỗ trợ.</div>
 </section>
 <footer><span>PERFECTIONISM &nbsp; / &nbsp; Làm việc rõ ràng. Hỗ trợ kịp thời.</span><span>CP3 · Giao diện thử nghiệm</span></footer>
 </main>
+<dialog id="context-dialog" aria-labelledby="context-title"><section class="context-head"><div><span class="context-kicker">DISCORD SIMULATOR</span><h2 id="context-title">Đang tải ngữ cảnh…</h2><p id="context-meta"></p></div><button id="close-context" class="icon-button" aria-label="Đóng ngữ cảnh">×</button></section><div id="context-messages" class="context-messages" aria-live="polite"></div><p class="context-note">Hiển thị tối đa 2 tin trước và 2 tin sau trong cùng kênh. Đây là local adapter mô phỏng Discord API.</p></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 </body>
 </html>

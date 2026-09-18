@@ -12,3 +12,7 @@ node_modules/
 __pycache__/
 .venv/
 /backup/
+
+# Local build artifacts for the CP5 deck
+/.cp5-build/
+/.chart-data-*/

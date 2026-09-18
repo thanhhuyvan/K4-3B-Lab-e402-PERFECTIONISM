@@ -5,6 +5,7 @@ const { analyzeWithModel, BATCH_SIZE } = require('./model-adapter');
 
 const PORT = Number(process.env.PORT || 8787);
 const PUBLIC_DIR = path.join(__dirname, 'public');
+const DEMO_BATCH_FILE = path.join(__dirname, 'demo-data', 'discord-simulator-batch.json');
 const MAX_BODY_BYTES = 20_000_000;
 const LOG_DIR = path.join(__dirname, '..', 'data-local');
 const LOG_FILE = path.join(LOG_DIR, 'cp3-runtime.log');
@@ -37,7 +38,7 @@ function parseTimestamp(value) {
 }
 
 function isQuestion(content) {
-  return /\?|cho\s+.*hỏi|làm\s+sao|thế\s+nào|ở\s+đâu|khi\s+nào|bao\s+giờ|không\s+.*được|xin\s+.*hỗ trợ/i.test(content);
+  return /\?|cho\s+.*hỏi|làm\s+sao|thế\s+nào|ở\s+đâu|khi\s+nào|bao\s+giờ|không\s+.*được|xin\s+.*hỗ trợ|\blỗi\b|\berror\b|\bexception\b|\bbug\b|\bmodule\b|\bcuda\b|\b401\b|\b404\b|\b500\b|không\s+(?:mở|vào|chạy|cài|nộp|tải|đăng nhập|truy cập)|vẫn\s+(?:lỗi|bị|không)|\b(?:kẹt|stuck)\b|hạn\s+(?:nộp|chót)|\bdeadline\b|xin\s+(?:file|link|dataset|tài liệu)/i.test(content);
 }
 
 function prepare(records) {
@@ -53,6 +54,30 @@ function prepare(records) {
       .sort((a, b) => a.timestamp - b.timestamp).slice(0, 8).map(other => ({ id: other.id, time: other.time, content: other.content, isBot: other.isBot, replyTo: other.replyTo }))
   }));
   return { snapshot_at: new Date(snapshot).toISOString(), total_messages: messages.length, analyzed_candidates: candidates.length, candidates };
+}
+
+function loadDemoBatch() {
+  const records = JSON.parse(fs.readFileSync(DEMO_BATCH_FILE, 'utf8'));
+  if (!Array.isArray(records) || !records.length) throw new Error('DEMO_BATCH_INVALID');
+  return records;
+}
+
+function getDemoContext(msgId) {
+  const records = loadDemoBatch().sort((a, b) => parseTimestamp(a.created_at_vn) - parseTimestamp(b.created_at_vn));
+  const focusIndex = records.findIndex(record => record.msg_id === msgId);
+  if (focusIndex < 0) { const error = new Error('DEMO_MESSAGE_NOT_FOUND'); error.code = 'DEMO_MESSAGE_NOT_FOUND'; throw error; }
+  const focus = records[focusIndex];
+  const channelMessages = records.filter(record => record.guild === focus.guild && record.channel === focus.channel);
+  const indexInChannel = channelMessages.findIndex(record => record.msg_id === msgId);
+  return {
+    focus_id: msgId,
+    guild: focus.guild,
+    channel: focus.channel,
+    messages: channelMessages.slice(Math.max(0, indexInChannel - 2), indexInChannel + 3).map(record => ({
+      id: record.msg_id, time: record.created_at_vn, content: record.content, is_bot: record.is_bot,
+      author: record.is_bot ? 'Bot' : 'Học viên demo', avatar: record.is_bot ? '/assets/discord_icon.jpg' : null
+    }))
+  };
 }
 
 function json(res, status, body) { res.writeHead(status, { 'content-type': 'application/json; charset=utf-8' }); res.end(JSON.stringify(body)); }
@@ -77,6 +102,22 @@ http.createServer(async (req, res) => {
     if (req.method === 'GET' && req.url === '/') { sendStatic(res, 'index.html', 'text/html; charset=utf-8'); log('response', { status: 200, route: '/' }); return; }
     if (req.method === 'GET' && req.url === '/app.js') { sendStatic(res, 'app.js', 'text/javascript; charset=utf-8'); log('response', { status: 200, route: '/app.js' }); return; }
     if (req.method === 'GET' && req.url === '/styles.css') { sendStatic(res, 'styles.css', 'text/css; charset=utf-8'); log('response', { status: 200, route: '/styles.css' }); return; }
+    if (req.method === 'GET' && req.url === '/assets/discord_icon.jpg') { res.writeHead(200, { 'content-type': 'image/jpeg', 'cache-control': 'public, max-age=3600' }); res.end(fs.readFileSync(path.join(__dirname, '..', 'Image', 'discord_icon.jpg'))); log('response', { status: 200, route: '/assets/discord_icon.jpg' }); return; }
+    if (req.method === 'GET' && req.url.startsWith('/api/demo-context')) {
+      const requestUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+      const msgId = requestUrl.searchParams.get('msg_id');
+      if (!msgId) throw new Error('MSG_ID_REQUIRED');
+      const context = getDemoContext(msgId);
+      json(res, 200, context); log('response', { status: 200, route: '/api/demo-context', focus_id: msgId, messages: context.messages.length }); return;
+    }
+    if (req.method === 'POST' && req.url === '/api/demo-analyze') {
+      const prepared = prepare(loadDemoBatch());
+      log('demo_batch_prepared', { total_messages: prepared.total_messages, analyzed_candidates: prepared.analyzed_candidates });
+      const items = await analyzeWithModel(prepared.candidates);
+      json(res, 200, { mode: 'discord_simulator', source: 'Discord simulator · batch demo ẩn danh', ...prepared, candidates: undefined, batch_size: BATCH_SIZE, items });
+      log('response', { status: 200, route: req.url, items: items.length, batch_size: BATCH_SIZE });
+      return;
+    }
     if (req.method !== 'POST' || !['/api/prepare', '/api/analyze'].includes(req.url)) return json(res, 404, { error: { code: 'NOT_FOUND', message: 'Route không tồn tại.' } });
     const body = JSON.parse(await readBody(req));
     if (typeof body.csv !== 'string' || !body.csv.trim()) throw new Error('CSV_REQUIRED');

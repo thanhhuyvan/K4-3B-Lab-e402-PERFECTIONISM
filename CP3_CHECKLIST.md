@@ -17,8 +17,8 @@ Mục tiêu: CSV local → AI đề xuất câu cần TA xem → bảng hai cộ
 - [x] Lưu trace AI synthetic đã lọc tại `eval/run-mvp-synthetic.md`.
 - [x] Chạy một case dữ liệu BTC có kiểm soát qua AI thật; trace đã lọc tại `eval/run-btc-case-01-redacted.md`.
 - [x] Ghi model, thời điểm chạy, số candidate và trạng thái request trong trace; không ghi key.
-- [ ] Chạy lại golden set/ít nhất các case trọng tâm qua backend hiện tại; không dùng số cũ nếu không có trace tương ứng.
-- [ ] Ghi rõ đạt/tổng, false positive, false negative và các case lỗi/bị lọc.
+- [x] Chạy lại golden set 22 case qua backend hiện tại; lượt nộp tại `eval/run-04-current.md`.
+- [x] Ghi đạt/tổng, baseline, lỗi prefilter và lỗi phân loại trong `eval/run-04-current.md`.
 - [ ] Quay video 30 giây: chọn CSV → loading AI thật → bảng hai cột → số đo/giới hạn.
 - [ ] Kiểm tra video không lộ `.env`, API key hay toàn bộ raw dataset.
 - [ ] Đọc lại diff: không có dataset, `.env`, trace nhạy cảm hoặc response demo giả làm AI.
